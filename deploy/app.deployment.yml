@@ -1,17 +1,19 @@
 apiVersion: apps/v1
-kind: Deployment
-namespace:  test-app  
+kind: Deployment  
 metadata:
-  name: nginx-app-deployment
+  name: nginx-app-deployment-standalone 
+  namespace:  test-app 
 spec:
+  replicas : 2 
   selector:
     matchLabels:
-      app: nginx-app-deployment
+      app: nginx-app-deployment-standalone
   template:
     metadata:
       labels:
-        app: nginx-app-deployment
+        app: nginx-app-deployment-standalone
     spec:
+        
       containers:
       - name: nginx-app-deployment
         image: node/server:1.0 

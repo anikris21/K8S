@@ -1,0 +1,17 @@
+# kubectl apply -f deploy/app.service.yml -n test-app  
+# apk add curl
+apiVersion: v1
+kind: Service  
+metadata:
+  name: nginx-app-node
+  namespace:  test-app
+  labels:
+        app: nginx-app-deployment 
+spec:
+  selector:
+    app: nginx-app-deployment 
+  ports:
+    - port: 8060
+      targetPort: 8080      
+
+   
