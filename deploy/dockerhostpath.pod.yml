@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod 
+metadata:
+  name: docker-hostpath01
+  labels:
+        app: nginx-app-volumes   
+spec:
+  volumes:
+    - name: docker-socket
+      hostPath: 
+         #path: /var/run/docker.sock
+         path: /Users/anikrisms/Desktop/K8S/docker1/dockerfile.text 
+         type: File
+  containers:
+    - env:  
+      - name: POD_IP
+        valueFrom:  
+          fieldRef:
+            fieldPath: status.podIP
+      
+      command: ["/bin/sh"]
+      args: ["-c", "while true; do date >> /dockerfile.text;  sleep 10;done"]        
+      name: docker      
+      image: docker
+      volumeMounts:
+        - name : docker-socket
+          #mountPath: /var/run/docker.sock
+          mountPath: /dockerfile.text    
